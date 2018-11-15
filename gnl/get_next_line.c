@@ -6,7 +6,7 @@
 /*   By: bihattay <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 08:20:08 by bihattay          #+#    #+#             */
-/*   Updated: 2018/11/15 10:44:41 by bihattay         ###   ########.fr       */
+/*   Updated: 2018/11/15 11:05:33 by bihattay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,14 @@ void	display_file(const int fd)
 
 int		get_next_line(const int fd, char **line)
 {
-	int		i;
+//	int		i;
 
-	i = 1;
-	while (line[i])
-	{
-		fd = open(line[i], O_RDONLY);
+//	i = 1;
+//	while (line[i])
+//	{
+		//fd = open(line[i], O_RDONLY);
 		display_file(fd);
-		i++;
-	}
+//		i++;
+//	}
+	return (0);
 }
