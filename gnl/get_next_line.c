@@ -6,7 +6,7 @@
 /*   By: bihattay <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 08:20:08 by bihattay          #+#    #+#             */
-/*   Updated: 2018/11/15 11:05:33 by bihattay         ###   ########.fr       */
+/*   Updated: 2018/11/17 07:00:08 by bihattay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <unistd.h>
+#include <string.h>
 //#include "get_next_line.h"
 
 void	display_file(const int fd)
@@ -26,14 +27,21 @@ void	display_file(const int fd)
 
 int		get_next_line(const int fd, char **line)
 {
-//	int		i;
+	char	buf[1];
+	char	*tab;
+	char	*tmp;
 
-//	i = 1;
-//	while (line[i])
-//	{
-		//fd = open(line[i], O_RDONLY);
-		display_file(fd);
-//		i++;
-//	}
+	if (!(tab = malloc(sizeof(char) * (1))) || (fd == -1))
+		return (0);
+	while ((read(0, buff, 1) > 0))
+	{
+		tmp = tab;
+		if (!(tab = malloc(sizeof(*tab) * (++i + 1))))
+			return (0);
+		tab[0] = '\0';
+		strncat(tab, tmp, i + 1);
+		strncat(tab, buff, 1);
+	}
+	free(tmp);
 	return (0);
 }
