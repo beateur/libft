@@ -1,24 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_str_is_alpha.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bihattay <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/26 17:23:21 by bihattay          #+#    #+#             */
-/*   Updated: 2018/11/28 02:06:36 by bihattay         ###   ########.fr       */
+/*   Created: 2018/11/09 14:31:59 by bihattay          #+#    #+#             */
+/*   Updated: 2018/11/09 14:33:53 by bihattay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "libft.h"
 
-# include <unistd.h>
-# include <stdlib.h>
-# include "libft/libft.h"
-# include <fcntl.h>
-# define BUFF_SIZE 3
+int		ft_str_is_alpha(const char *pdtr)
+{
+	char	*str;
 
-int		get_next_line(const int fd, char **line);
-
-#endif
+	str = (char *)pdtr;
+	while (*str)
+	{
+		if ((*str < 'a' || *str > 'z') && (*str < 'A' || *str > 'Z'))
+			return (0);
+		str++;
+	}
+	return (1);
+}

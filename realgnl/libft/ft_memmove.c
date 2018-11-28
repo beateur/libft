@@ -1,24 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bihattay <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/26 17:23:21 by bihattay          #+#    #+#             */
-/*   Updated: 2018/11/28 02:06:36 by bihattay         ###   ########.fr       */
+/*   Created: 2018/11/09 11:30:20 by bihattay          #+#    #+#             */
+/*   Updated: 2018/11/13 08:02:43 by bihattay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "libft.h"
 
-# include <unistd.h>
-# include <stdlib.h>
-# include "libft/libft.h"
-# include <fcntl.h>
-# define BUFF_SIZE 3
+void	*ft_memmove(void *dest, const void *src, size_t n)
+{
+	char	*destc;
+	char	*srcc;
 
-int		get_next_line(const int fd, char **line);
-
-#endif
+	destc = (char *)dest;
+	srcc = (char *)src;
+	if (destc > srcc)
+	{
+		destc += n - 1;
+		srcc += n - 1;
+		while (n-- > 0)
+			*destc-- = *srcc--;
+	}
+	else
+	{
+		while (n-- > 0)
+			*destc++ = *srcc++;
+	}
+	return (dest);
+}

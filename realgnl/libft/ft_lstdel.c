@@ -1,24 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_lstdel.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bihattay <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/26 17:23:21 by bihattay          #+#    #+#             */
-/*   Updated: 2018/11/28 02:06:36 by bihattay         ###   ########.fr       */
+/*   Created: 2018/11/09 07:16:18 by bihattay          #+#    #+#             */
+/*   Updated: 2018/11/09 15:52:47 by bihattay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "libft.h"
 
-# include <unistd.h>
-# include <stdlib.h>
-# include "libft/libft.h"
-# include <fcntl.h>
-# define BUFF_SIZE 3
+void	ft_lstdel(t_list **alst, void (*del)(void *, size_t))
+{
+	t_list	*maillon;
+	t_list	*tmp;
 
-int		get_next_line(const int fd, char **line);
-
-#endif
+	maillon = *alst;
+	while (maillon)
+	{
+		del(maillon->content, maillon->content_size);
+		tmp = maillon;
+		maillon = maillon->next;
+		free(tmp);
+	}
+	*alst = NULL;
+}

@@ -1,24 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bihattay <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/26 17:23:21 by bihattay          #+#    #+#             */
-/*   Updated: 2018/11/28 02:06:36 by bihattay         ###   ########.fr       */
+/*   Created: 2018/11/09 03:41:01 by bihattay          #+#    #+#             */
+/*   Updated: 2018/11/13 06:32:59 by bihattay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "libft.h"
 
-# include <unistd.h>
-# include <stdlib.h>
-# include "libft/libft.h"
-# include <fcntl.h>
-# define BUFF_SIZE 3
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
+{
+	char			*new;
+	unsigned int	i;
 
-int		get_next_line(const int fd, char **line);
-
-#endif
+	i = 0;
+	if (s != NULL && f != NULL)
+	{
+		if (!(new = (char *)malloc(sizeof(char) * ft_strlen(s) + 1)))
+			return (NULL);
+		while (*s)
+		{
+			new[i] = (*f)(i, *s);
+			s++;
+			i++;
+		}
+		new[i] = '\0';
+		return (new);
+	}
+	return (NULL);
+}

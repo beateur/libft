@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alamorth <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: bihattay <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/26 17:14:28 by alamorth          #+#    #+#             */
-/*   Updated: 2018/11/26 20:56:20 by alamorth         ###   ########.fr       */
+/*   Created: 2018/11/26 17:14:28 by bihattay          #+#    #+#             */
+/*   Updated: 2018/11/28 02:05:28 by bihattay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,13 @@ int		kiride(int fd, char **str, int i, char **buf)
 		tmp[res] = '\0';
 		tmp = *str;
 		if (*str)
-			*str = ft_strjoin(*str, *buf);
+			*str = NULL;
 		else
 			*str = ft_strdup(*buf);
 		if (i > 0)
 			ft_strdel(&tmp);
+		if (*str == NULL)
+			return (-1);
 		if (ft_strchr(*str, '\n'))
 		{
 			ft_strdel(buf);
