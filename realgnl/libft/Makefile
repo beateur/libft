@@ -6,7 +6,7 @@
 #    By: bihattay <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/09 12:43:23 by bihattay          #+#    #+#              #
-#    Updated: 2018/11/15 08:14:17 by bihattay         ###   ########.fr        #
+#    Updated: 2018/11/28 03:25:10 by bihattay         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,6 +67,8 @@ SOURCES = ft_atoi.c\
 		  ft_putstr_fd.c\
 		  ft_putendl_fd.c\
 		  ft_putnbr_fd.c\
+		  ft_putchar_error.c\
+		  ft_putnbr_error.c\
 		  ft_strnew.c\
 		  ft_lstnew.c\
 		  ft_lstdelone.c\

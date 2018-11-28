@@ -6,7 +6,7 @@
 /*   By: bihattay <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 17:14:28 by bihattay          #+#    #+#             */
-/*   Updated: 2018/11/28 02:05:28 by bihattay         ###   ########.fr       */
+/*   Updated: 2018/11/28 04:45:18 by bihattay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,25 +25,25 @@ int		kiride(int fd, char **str, int i, char **buf)
 {
 	int		res;
 	char	*tmp;
-
+	
 	while ((res = read(fd, *buf, BUFF_SIZE)) > 0 && ++i > -1)
 	{
 		tmp = *buf;
 		tmp[res] = '\0';
 		tmp = *str;
 		if (*str)
-			*str = NULL;
+			*str = ft_strjoin(*str, *buf);
 		else
 			*str = ft_strdup(*buf);
 		if (i > 0)
 			ft_strdel(&tmp);
-		if (*str == NULL)
-			return (-1);
-		if (ft_strchr(*str, '\n'))
+		if ((*str != NULL) && (ft_strchr(*str, '\n')))
 		{
 			ft_strdel(buf);
 			return (res);
 		}
+		if (*str == NULL)
+			return (-1);
 	}
 	ft_strdel(buf);
 	return (res);
@@ -56,6 +56,8 @@ int		kirenpli(char **line, char **str, int *res)
 
 	tmp = *str;
 	i = 0;
+	if (!tmp)
+		return (-1);
 	while (tmp[i] != '\0' && tmp[i] != '\n')
 		i++;
 	if (i == 0 || tmp[0] == '\0')
@@ -83,10 +85,15 @@ int		get_next_line(int fd, char **line)
 	int			ret;
 
 	i = -1;
+	ret = fd;
 	if (!(checkerror(fd, line, &buf)))
 		return (-1);
 	if ((res = kiride(fd, &str[fd], i, &buf)) == -1)
+	{
+		if (buf)
+			ft_strdel(&buf);
 		return (-1);
+	}
 	ret = kirenpli(line, &str[fd], &res);
 	return (ret);
 }

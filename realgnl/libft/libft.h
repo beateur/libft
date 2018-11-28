@@ -6,7 +6,7 @@
 /*   By: bihattay <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/08 21:49:30 by bihattay          #+#    #+#             */
-/*   Updated: 2018/11/15 08:12:18 by bihattay         ###   ########.fr       */
+/*   Updated: 2018/11/28 02:20:15 by bihattay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ void			ft_putchar_fd(char c, int fd);
 void			ft_putstr_fd(char const *s, int fd);
 void			ft_putnbr_fd(int n, int fd);
 void			ft_putendl_fd(char const *s, int fd);
+void			ft_putchar_error(char c);
+void			ft_putnbr_error(int n);
 char			*ft_strchr(const char *s, int c);
 char			*ft_strrchr(const char *s, int c);
 char			*ft_strdup(const char *src);
