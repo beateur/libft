@@ -6,7 +6,7 @@
 /*   By: bihattay <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 17:14:28 by bihattay          #+#    #+#             */
-/*   Updated: 2018/11/28 04:45:18 by bihattay         ###   ########.fr       */
+/*   Updated: 2018/11/28 04:53:04 by bihattay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int		kiride(int fd, char **str, int i, char **buf)
 {
 	int		res;
 	char	*tmp;
-	
+
 	while ((res = read(fd, *buf, BUFF_SIZE)) > 0 && ++i > -1)
 	{
 		tmp = *buf;

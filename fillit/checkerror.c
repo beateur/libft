@@ -6,9 +6,14 @@
 /*   By: bihattay <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/29 06:58:14 by bihattay          #+#    #+#             */
-/*   Updated: 2018/11/29 07:08:10 by bihattay         ###   ########.fr       */
+/*   Updated: 2018/11/30 05:49:26 by bihattay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include <string.h>
+#include <stdio.h>
+#include <fcntl.h>
+#include "../realgnl/libft/libft.h"
+#include "../realgnl/get_next_line.h"
 
 int		checktetris(char **str, int i, int *j)
 {
@@ -63,48 +68,68 @@ int		checkform(char **str, int i)
 	return (1);
 }
 
-int		checkerror(char **str, int i)
+int		checkeror(char **str, int i)
 {
 	int		j;
 	int		k;
 
-	k = 0;
+	j = i - 4;
 	if ((i % 5 == 0) && (str[0] != '\0'))
 		return (0);
-	while (str[i])
+	while (str[j])
 	{
-		j = 0;
-		while (str[i][j])
+		k = 0;
+		while (str[j][k])
 		{
-			if (str[i][j] != '.' && str[i][j] != '#')
+			if (str[j][k] != '.' && str[j][k] != '#')
+			{
+		//		printf("%s", str[i]);
+			//	printf("%s", str[j]);
 				return (0);
-			j++;
+			}
+			k++;
 		}
-		if ((strlen(str[i]) != 4) && (i % 5 != 0))
+		if ((ft_strlen(str[j]) != 4) && (i % 5 != 0))
 			return (0);
-		i++;
+		j++;
 	}
 	if (!checkform(str, i))
 		return (0);
 	return (1);
 }
 
-int		ft_read(char **tab, char **argv)
+int		ft_read(char **tab, char *argv)
 {
 	char	*line;
 	int		fd;
 	int		i;
 
 	i = 0;
-	fd = open(argv[1], O_RDONLY);
-	if (!(tab = (char **)malloc(sizeof(char *) * 10000)))
-		return (0);
+	fd = open(argv, O_RDONLY);
 	while (get_next_line(fd, &line))
 	{
-		tab[i] = ft_strcpy(tab[i], line);
-		if ((i % 4 == 0) && (!checkerror(tab, i)))
+		if (!(tab[i] = (char *)ft_memalloc(10000)))
+			return (0);
+		if (!(tab[i] = strcpy(tab[i], line)))
 			return (0);
 		i++;
+	//	printf("%s\n", line);
+	//	write(1, tab[i], ft_strlen(line));
+		write(1, "\n", 1);
+		if ((i % 4 == 0) && (!checkeror(tab, i)))
+			return (0);
 	}
 	return (1);
+}
+
+int		main(int argc, char **argv)
+{
+	char	*tab;
+
+	if (!ft_read(&tab, argv[1]))
+	{
+		printf("TUTUT");
+		return (-1);
+	}
+	return (0);
 }
