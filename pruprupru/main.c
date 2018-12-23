@@ -1,25 +1,51 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bihattay <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/12/22 03:31:28 by bihattay          #+#    #+#             */
+/*   Updated: 2018/12/23 05:47:43 by bihattay         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fillit.h"
 
-void	ft_list_push_back(t_list **begin_list, void const *content, size_t content_size)
+t_list			*ft_list_push_back(t_list **list,
+		void const *content, int i)
 {
-	t_list *nouveau;
-	t_list *elem;
+	//t_list *nouveau;
+	//	t_list *elem;
 
-	if (begin_list == NULL)
-		return ;
-	nouveau = ft_lstnew(content, content_size);
-	if (*begin_list == NULL)
-		*begin_list = nouveau;
-	else
+	/*	if (begin_list == NULL)
+		return (0);
+		if (!(nouveau = ft_lstnew(content, content_size)))
+		return (0);
+		if (*begin_list == NULL)
+		{
+		printf("VOUS ETES ICI");
+	 *begin_list = nouveau;
+	 }
+	 else
+	 {
+	 elem = *begin_list;
+	 while (elem->next != NULL)
+	 elem = elem->next;
+	 elem->next = nouveau;
+	 }*/
+	if (!(*list = (t_list *)ft_memalloc(sizeof(t_list))))
+		return (NULL);
+	if (!((*list)->content= ft_strdup(content)))
 	{
-		elem = *begin_list;
-		while (elem->next != NULL)
-			elem = elem->next;
-		elem->next = nouveau;
+		free(*list);
+		return (NULL);
 	}
+	(*list)->index = i;
+	return (*list);
 }
 
-int is_tetri_format(char *buf)
+int				is_tetri_format(char *buf)
 {
 	int hashtags;
 	int i;
@@ -29,49 +55,69 @@ int is_tetri_format(char *buf)
 	while (buf[++i])
 	{
 		if ((i + 1) == 21 && buf[i] != '\n' && buf[i] != '\0')
+		{
 			return (0);
+		}
 		else if ((i + 1) % 5 == 0 && buf[i] != '\n')
+		{
 			return (0);
-		else if ((i + 1) != 21 && (i + 1) % 5 != 0 && buf[i] != '#' && buf[i] != '.')
+		}
+		else if ((i + 1) != 21 && (i + 1) % 5 != 0 && buf[i] != '#'
+				&& buf[i] != '.')
+		{
 			return (0);
+		}
 		else if ((i - 1 >= 0 && buf[i - 1] == '#')
 				|| (i + 1 <= 19 && buf[i + 1] == '#')
 				|| (i + 5 <= 19 && buf[i + 5] == '#')
 				|| (i - 5 >= 0 && buf[i - 5] == '#'))
 			hashtags += (buf[i] == '#');
 	}
+	printf("hashtags is = %d\n", hashtags);
 	return ((hashtags == 4 ? 1 : 0));
 }
-//printf("ok buf[%i] = -%c-\n", i, buf[i]);
-// {
-//     printf("invalid tetri 1 | buf[%i] = -%c-\n", i, buf[i]);
-//     return (0);
-// }
-int parse_input(int fd, t_list *pieces)
-{
-	int   i;
-	int   ret;
-	char  *buf;
 
-	buf = ft_strnew(21);
-	// if ((fd < 0 || read(fd, buf, 0) < 0))
-	//   return (0);
-	i = 0;
+t_list			*parse_input(int fd, t_list **begin_list)
+{
+	int		i;
+	int		ret;
+	char	buf[21];
+	int		k;
+	t_list	*pieces;
+
+	pieces = *begin_list;
+	k = 0;
+	if ((fd < 0 || read(fd, buf, 0) < 0))
+	{
+		printf("error is here");
+		return (NULL);
+	}
+	i = -1;
 	while ((ret = read(fd, buf, 21)) >= 1)
 	{
-		buf[21] = '\0';
-		//printf("\n***\n%s\n***\n", buf);
-		if (is_tetri_format(buf) && ++i)
+		buf[ret] = '\0';
+		//		printf("\n***\n%s\n***\n", buf);
+		if (!(is_tetri_format(buf)) && ++i)
+			return (NULL);
+		if (*begin_list == NULL)
 		{
-			ft_list_push_back(&pieces ,buf, ft_strlen(buf));
+			*begin_list = ft_list_push_back(&pieces, buf, i);
+			pieces = *begin_list;
 		}
 		else
-			return (0);
+		{
+			pieces->next = ft_list_push_back(&pieces->next, buf, i);
+			pieces = pieces->next;
+		}
+		//	printf("TAMERE");
+//		if (k != 0)
+		ft_check_width_height(&pieces);
+	//	k = 102;
 	}
-	return (1);
+return (*begin_list);
 }
 
-void				print_pieces(t_list *pieces)
+void			print_pieces(t_list *pieces)
 {
 	int		i;
 	t_list	*piece;
@@ -86,24 +132,27 @@ void				print_pieces(t_list *pieces)
 	}
 }
 
-int main(int argc, char **argv)
+int				main(int argc, char **argv)
 {
-	int fd;
-	t_list *pieces;
+	int		fd;
+	t_list	*begin_list;
 
-	if (argc != 2) // mauvais nbr d'arguments
+	//pieces = NULL;
+	begin_list = NULL;
+	if (argc != 2)// mauvais nbr d'arguments
 	{
 		ft_putstr_fd("usage: fillit input_file\n", 2);
 		return (0);
 	}
 	fd = open(argv[1], O_RDONLY);
-	if (!(pieces = ft_lstnew("start", 5)))
-		return (0);
-	if (!parse_input(fd, pieces)) // si mauvais format
+	//	if (!(pieces = ft_lstnew("start", 5)))
+	//		return (0);
+	if ((begin_list = parse_input(fd, &begin_list)) == NULL)// si mauvais format
 	{
-		ft_putstr_fd("error\n", 2);
+		ft_putstr_fd("error\n", 1);
 		return (0);
 	}
-	print_pieces(pieces);
+	//	ft_solve(&pieces, (ft_sqrt((ft_list_size(pieces) + 1) * 4)));
+	print_pieces(begin_list);
 	return (1);
 }

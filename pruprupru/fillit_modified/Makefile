@@ -1,7 +1,7 @@
 NAME = fillit
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
-SRCS = main.c ft_check.c
+SRCS = main.c
 OBJS = $(SRCS:.c=.o)
 
 $(NAME): $(OBJS)
@@ -9,10 +9,13 @@ $(NAME): $(OBJS)
 
 all: $(NAME)
 
+execute:
+		./$(NAME) text1.$(NAME)
+
 clean:
-		rm -rf $(OBJS)
+	rm -rf $(OBJS)
 
 fclean: clean
 		rm -rf $(NAME)
 
-re: fclean all
+re: fclean all execute

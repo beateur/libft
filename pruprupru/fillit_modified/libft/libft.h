@@ -6,7 +6,7 @@
 /*   By: fberger <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/16 22:18:15 by fberger           #+#    #+#             */
-/*   Updated: 2018/12/23 01:20:49 by bihattay         ###   ########.fr       */
+/*   Updated: 2018/11/17 05:00:03 by fberger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,8 @@
 
 typedef struct		s_list
 {
-	char			*content;
+	void			*content;
 	size_t			content_size;
-	int				index;
-	int				height;
-	int				width;
 	struct s_list	*next;
 }					t_list;
 
