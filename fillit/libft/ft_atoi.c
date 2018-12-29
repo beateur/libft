@@ -3,38 +3,64 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bihattay <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fberger <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/09 02:42:25 by bihattay          #+#    #+#             */
-/*   Updated: 2018/11/13 08:35:27 by bihattay         ###   ########.fr       */
+/*   Created: 2018/11/13 19:09:08 by fberger           #+#    #+#             */
+/*   Updated: 2018/11/21 23:43:39 by fberger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_atoi(const char *nptr)
+static int	nb_is_over_lim(const char *str, int size, int sign)
 {
-	int							i;
-	long long int				nb;
-	int							neg;
+	if (size > 19)
+		return (1);
+	else
+		return (str[0] == '9' && str[1] >= '2' && str[2] >= '2' && str[3] >= '3'
+		&& str[4] >= '3' && str[5] >= '7' && str[6] >= '2' && str[7] >= '0'
+		&& str[8] >= '3' && str[9] >= '6' && str[10] >= '8' && str[11] >= '5'
+		&& str[12] >= '4' && str[13] >= '7' && str[14] >= '7' && str[15] >= '5'
+		&& str[16] >= '8' && str[17] >= '0'
+		&& ((str[18] > '7' && sign == 1) || (str[18] > '8' && sign == -1)));
+}
 
-	neg = 1;
+static int	nb_is_over_long(const char *str, int sign)
+{
+	int	i;
+
 	i = 0;
+	while (str[i] >= 48 && str[i] <= 57)
+		i++;
+	if (i >= 19 && sign == 1)
+		return (nb_is_over_lim(str, i, sign) ? -1 : 1);
+	if (i >= 19 && sign == -1)
+		return (nb_is_over_lim(str, i, sign) ? 0 : 1);
+	return (1);
+}
+
+int			ft_atoi(const char *str)
+{
+	int				i;
+	int				sign;
+	long long int	nb;
+	int				check;
+
+	i = 0;
+	sign = 1;
 	nb = 0;
-	while (nptr[i] == ' ' || nptr[i] == '\n' || nptr[i] == '\t' ||
-			nptr[i] == '\r' || nptr[i] == '\f' || nptr[i] == '\v')
+	while (str[i] != '\0' && (str[i] == 32 || (str[i] >= 9 && str[i] <= 13)))
 		i++;
-	if ((int)ft_strlen(nptr) > 19 + i && ft_str_is_numeric(nptr + i))
-		return (-1);
-	if (nptr[i] == '-' || nptr[i] == '+')
-		neg = (nptr[i++] == '-' ? -1 : 1);
-	if ((int)ft_strlen(nptr) > 19 + i && neg == -1 &&
-			ft_str_is_numeric(nptr + i))
-		return (0);
-	while (nptr[i] >= '0' && nptr[i] <= '9' && nptr[i] != '\0')
+	if (str[i] == '+' || str[i] == '-')
 	{
-		nb = (nb * 10) + (nptr[i] - '0');
-		i++;
+		if (str[i] == '-')
+			sign = -1;
+		++i;
 	}
-	return (nb * neg);
+	check = nb_is_over_long(str + i, sign);
+	if (check != 1)
+		return (check);
+	while (str[i] >= '0' && str[i] <= '9')
+		nb = nb * 10 + str[i++] - 48;
+	return (nb * sign);
 }

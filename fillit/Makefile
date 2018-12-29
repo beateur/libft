@@ -1,32 +1,22 @@
 NAME = fillit
+CC = gcc
+CFLAGS = -Wall -Wextra -Werror# -O3 -march=native
+SRCS = srcs/main.c srcs/ft_map.c srcs/ft_check.c srcs/ft_solve.c\
+	   srcs/ft_tetris.c srcs/free.c
+OBJS = $(SRCS:.c=.o)
 
-FLAGS = -Wall -Wextra -Werror
-
-HEADERS = 	fillit.h\
-						libft/libft.h\
-
-LIB = libft.a
-
-SOURCES = 	main.c\
-						read.c\
-									ft_solve.c\
-
-
-OBJECT = $(SOURCES:.c=.o)
-
-$(NAME): $(LIB)
-		@gcc -o $(NAME) $(FLAGS) $(SOURCES) -L./libft/ -lft
+$(NAME): $(OBJS)
+		make -C libft
+		$(CC) $(FLAGS) -o $(NAME) $(OBJS) libft/libft.a -L./libft
 
 all: $(NAME)
 
-$(LIB):
-			@make -C libft re
-
-
-clean:
-		@rm -rf $(OBJECT)
+clean: 
+		rm -rf $(OBJS)
+		make clean -C libft
 
 fclean: clean
-		@rm -rf $(NAME)
+		rm -rf $(NAME)
+		make fclean -C libft
 
 re: fclean all

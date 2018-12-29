@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strsub.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bihattay <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fberger <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/09 04:11:42 by bihattay          #+#    #+#             */
-/*   Updated: 2018/11/13 06:44:50 by bihattay         ###   ########.fr       */
+/*   Created: 2018/11/11 05:30:28 by fberger           #+#    #+#             */
+/*   Updated: 2018/11/17 05:40:23 by fberger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,29 @@
 
 char	*ft_strsub(char const *s, unsigned int start, size_t len)
 {
-	char	*copy;
-	size_t	i;
+	unsigned int	i;
+	size_t			j;
+	char			*sub;
 
+	if (!s)
+		return ((char *)NULL);
 	i = 0;
-	if (s == NULL)
-		return (NULL);
-	if (!(copy = (char *)malloc(sizeof(char) * (len + 1))))
-		return (NULL);
-	while (i < len)
+	while (s[i])
 	{
-		if ((char)s[start + i] == '\0')
-			return (NULL);
-		copy[i] = (char)s[start + i];
+		if (i == start)
+		{
+			if ((sub = malloc(sizeof(char) * len + 1)) == NULL)
+				return (NULL);
+			j = 0;
+			sub[len] = '\0';
+			while (j < len)
+			{
+				sub[j] = s[i + j];
+				j++;
+			}
+			return (sub);
+		}
 		i++;
 	}
-	copy[i] = '\0';
-	return (copy);
+	return ((char *)NULL);
 }

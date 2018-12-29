@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bihattay <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/03 09:49:09 by bihattay          #+#    #+#             */
-/*   Updated: 2018/12/03 09:49:20 by bihattay         ###   ########.fr       */
+/*   Created: 2018/12/25 08:52:05 by bihattay          #+#    #+#             */
+/*   Updated: 2018/12/29 01:49:24 by bihattay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 int		ft_sqrt(int nb)
 {
-	int	r;
+	int i;
 
-	r = 1;
-	if (nb == 0)
+	if (nb < 0)
 		return (0);
-	while (r <= nb / r && !(r * r == nb))
-		r++;
-	return (r);
+	i = 0;
+	while (i * i < nb && i < 46342)
+		i++;
+	return (i);
 }

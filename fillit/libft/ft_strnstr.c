@@ -3,35 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bihattay <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fberger <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/11 04:48:31 by bihattay          #+#    #+#             */
-/*   Updated: 2018/11/11 04:49:18 by bihattay         ###   ########.fr       */
+/*   Created: 2018/11/10 20:03:33 by fberger           #+#    #+#             */
+/*   Updated: 2018/11/17 04:04:15 by fberger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char		*ft_strnstr(const char *s1, const char *s2, size_t n)
+char	*ft_strnstr(const char *m, const char *a, size_t n)
 {
-	size_t	i;
-	size_t	cur;
+	size_t i;
+	size_t j;
 
-	i = 0;
-	cur = 0;
-	if (!*s2)
-		return ((char *)s1);
-	while (s1[i] && n > i)
+	i = -1;
+	if (ft_strlen(a) == 0)
+		return ((char *)m);
+	while (m[++i] != '\0' && i < n)
 	{
-		if (s1[i + cur] == s2[cur] && i + cur < n)
-			cur++;
-		else
-		{
-			cur = 0;
-			i++;
-		}
-		if (!s2[cur])
-			return ((char *)s1 + i);
+		j = 0;
+		while (a[j] && a[j] == m[i + j] && (i + j) < n)
+			j++;
+		if (a[j] == '\0')
+			return (((char *)m) + i);
 	}
-	return (0);
+	return (NULL);
 }

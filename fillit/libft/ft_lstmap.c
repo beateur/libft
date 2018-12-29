@@ -3,38 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bihattay <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fberger <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/09 07:27:25 by bihattay          #+#    #+#             */
-/*   Updated: 2018/11/15 08:25:44 by bihattay         ###   ########.fr       */
+/*   Created: 2018/11/16 21:48:51 by fberger           #+#    #+#             */
+/*   Updated: 2018/11/16 21:49:49 by fberger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list		*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem))
+t_list	*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem))
 {
+	t_list	*element;
+	t_list	*new_element;
+	t_list	*broker;
 	t_list	*new;
-	t_list	*tmp;
-	t_list	*first;
 
-	if (lst)
+	element = lst;
+	if (element)
 	{
-		tmp = f(lst);
-		if (!(new = ft_lstnew(tmp->content, tmp->content_size)))
-			return (NULL);
-		first = new;
-		lst = lst->next;
-		while (lst)
-		{
-			tmp = f(lst);
-			if (!(new->next = ft_lstnew(tmp->content, tmp->content_size)))
-				return (NULL);
-			new = new->next;
-			lst = lst->next;
-		}
-		return (first);
+		broker = f(element);
+		new_element = ft_lstnew(broker->content, broker->content_size);
+		new = new_element;
 	}
 	else
 		return (NULL);
+	element = element->next;
+	while (element)
+	{
+		broker = f(element);
+		new_element->next = ft_lstnew(broker->content, broker->content_size);
+		element = element->next;
+		new_element = new_element->next;
+	}
+	return (new);
 }
