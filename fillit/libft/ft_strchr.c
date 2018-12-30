@@ -6,7 +6,7 @@
 /*   By: fberger <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/10 18:39:00 by fberger           #+#    #+#             */
-/*   Updated: 2018/11/13 22:06:28 by fberger          ###   ########.fr       */
+/*   Updated: 2018/12/30 01:51:49 by bihattay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	*ft_strchr(const char *s, int c)
 
 	i = -1;
 	sptr = (char *)s;
-	while (sptr[++i] != '\0')
+	while (sptr && sptr[++i] != '\0')
 	{
 		if (sptr[i] == (char)c)
 			return (sptr + i);

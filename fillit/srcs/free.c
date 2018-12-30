@@ -6,7 +6,7 @@
 /*   By: bihattay <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/24 23:20:01 by bihattay          #+#    #+#             */
-/*   Updated: 2018/12/29 08:01:14 by bihattay         ###   ########.fr       */
+/*   Updated: 2018/12/30 03:35:20 by bihattay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,19 @@ void	free_map(t_map **map)
 	i = -1;
 	while (++i < (*map)->size)
 		ft_strdel(&((*map)->set[i]));
+	printf("1 - addr map -->%p | addr *map -->%p  | addrset -->%p\n", map, *map, (*map)->set);
 	ft_memdel((void *)&(*map)->set);
+	printf("2 - addr map -->%p | addr *map -->%p  | addrset -->%p\n", map, *map, (*map)->set);
 	ft_memdel((void *)map);
+	printf("3 - addr map -->%p | addr *map -->%p\n", map, *map);
 }
 
-int		free_tetris(t_tetris **head)
+int		free_tetris(t_tetris **tetris)
 {
 	t_tetris	*tmp;
 	t_tetris	*curr;
 
-	curr = *head;
+	curr = *tetris;
 	while (curr)
 	{
 		ft_memdel(&(curr->content));
@@ -39,9 +42,9 @@ int		free_tetris(t_tetris **head)
 	return (1);
 }
 
-void	ft_free(t_tetris **head, t_map **map, int i)
+void	ft_free(t_tetris **tetris, t_map **map, int i)
 {
-	free_tetris(head);
+	free_tetris(tetris);
 	if (i == 0)
 		free_map(map);
 }

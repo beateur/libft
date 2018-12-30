@@ -6,7 +6,7 @@
 /*   By: bihattay <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 01:50:00 by bihattay          #+#    #+#             */
-/*   Updated: 2018/12/29 07:26:07 by bihattay         ###   ########.fr       */
+/*   Updated: 2018/12/30 03:31:47 by bihattay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void				push_back_tetris(t_tetris **begin_list, int id,
 		void const *content, size_t content_size);
 t_tetris			*create_tetris_elem(int i, void const *c, size_t cnt_size);
 void				find_directions(t_tetris *elem);
-void				print_map(t_map *map, t_tetris *pieces);
+void				print_map(t_map *map, t_tetris **pieces);
 t_map				*create_map_elem(int size);
 void				ft_free(t_tetris **head, t_map **map, int i);
 

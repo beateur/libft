@@ -6,7 +6,7 @@
 /*   By: bihattay <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/25 05:06:51 by bihattay          #+#    #+#             */
-/*   Updated: 2018/12/29 07:27:12 by bihattay         ###   ########.fr       */
+/*   Updated: 2018/12/30 03:31:55 by bihattay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_map		*create_map_elem(int size)
 	return (map);
 }
 
-void		print_map(t_map *map, t_tetris *pieces)
+void		print_map(t_map *map, t_tetris **pieces)
 {
 	int		i;
 	t_map	*save;
@@ -43,5 +43,5 @@ void		print_map(t_map *map, t_tetris *pieces)
 	save = map;
 	while (i < map->size)
 		ft_putendl(map->set[i++]);
-	ft_free(&pieces, &save, 0);
+	ft_free(pieces, &save, 0);
 }
