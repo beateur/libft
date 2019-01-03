@@ -6,7 +6,7 @@
 /*   By: bihattay <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 01:50:00 by bihattay          #+#    #+#             */
-/*   Updated: 2019/01/03 19:42:55 by bihattay         ###   ########.fr       */
+/*   Updated: 2019/01/03 19:50:46 by bihattay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@
 # include <stdio.h>
 # include <fcntl.h>
 # include "../libft/libft.h"
-
-int		combien = 0;
 
 typedef struct		s_map
 {

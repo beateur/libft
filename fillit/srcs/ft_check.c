@@ -6,7 +6,7 @@
 /*   By: bihattay <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 01:34:12 by bihattay          #+#    #+#             */
-/*   Updated: 2019/01/03 17:35:13 by bihattay         ###   ########.fr       */
+/*   Updated: 2019/01/03 20:19:17 by bihattay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ void	find_directions(t_tetris *elem)
 	char	*ptr;
 
 	ptr = (char *)elem->content;
-//	printf("\naddr content -->%p | addr ptr -->%s\n", elem->content, ptr);
 	if (ptr && !ft_strchr(ptr, 35))
 		return ;
 	a = (ptr[0] == 35) ? 1 : ((ft_strchr_modified(ptr, 35) - ptr) + 1);

@@ -6,7 +6,7 @@
 /*   By: bihattay <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/24 19:30:07 by bihattay          #+#    #+#             */
-/*   Updated: 2019/01/03 19:44:01 by bihattay         ###   ########.fr       */
+/*   Updated: 2019/01/03 20:12:07 by bihattay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,14 @@ int		main(int argc, char **argv)
 		ft_putstr_fd("error\n", 1);
 		return (0);
 	}
-	pieces = pieces->next;
-	size = ft_sqrt((count_tetris(pieces)) * 4);
-	map = create_map_elem(++size);
-	while (!solve(pieces, map))
+	size = ft_sqrt((count_tetris(pieces->next)) * 4);
+	map = create_map_elem(size++);
+	while (!solve(pieces->next, map))
+	{
+		if (map)
+			free_map(&map);
 		map = create_map_elem(size++);
+	}
 	print_map(map, &pieces);
-	printf("combien de malloc --->%d\n", combien);
 	return (1);
 }
