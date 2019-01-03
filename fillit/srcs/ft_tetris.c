@@ -6,7 +6,7 @@
 /*   By: bihattay <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 01:29:25 by bihattay          #+#    #+#             */
-/*   Updated: 2018/12/30 01:56:06 by bihattay         ###   ########.fr       */
+/*   Updated: 2019/01/03 19:47:07 by bihattay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ t_tetris	*create_tetris_elem(int id,
 {
 	t_tetris	*elem;
 
-	if (!(elem = (t_tetris *)malloc(sizeof(t_tetris))))
+	if (!(elem = (t_tetris *)malloc(sizeof(t_tetris))) && ft_inc(&combien))
 		return (NULL);
-	if (!(elem->content = malloc(content_size + 1)))
+	if (!(elem->content = (void*)ft_memalloc(content_size + 1)) && ft_inc(&combien))
 		return (NULL);
 	elem->id = id;
 	ft_memcpy(elem->content, content, content_size);

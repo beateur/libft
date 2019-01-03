@@ -6,7 +6,7 @@
 /*   By: bihattay <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 01:50:00 by bihattay          #+#    #+#             */
-/*   Updated: 2018/12/30 03:31:47 by bihattay         ###   ########.fr       */
+/*   Updated: 2019/01/03 19:42:55 by bihattay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include <stdio.h>
 # include <fcntl.h>
 # include "../libft/libft.h"
+
+int		combien = 0;
 
 typedef struct		s_map
 {
@@ -50,5 +52,7 @@ void				find_directions(t_tetris *elem);
 void				print_map(t_map *map, t_tetris **pieces);
 t_map				*create_map_elem(int size);
 void				ft_free(t_tetris **head, t_map **map, int i);
+void				solve_map(t_tetris *pieces, t_map *map, int size);
+void				free_map(t_map **map);
 
 #endif

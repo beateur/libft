@@ -6,7 +6,7 @@
 /*   By: bihattay <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/25 05:06:51 by bihattay          #+#    #+#             */
-/*   Updated: 2018/12/30 03:31:55 by bihattay         ###   ########.fr       */
+/*   Updated: 2019/01/03 19:42:57 by bihattay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ t_map		*create_map_elem(int size)
 	t_map		*map;
 
 	row = 0;
-	if (!(map = (t_map *)malloc(sizeof(t_map))))
+	if (!(map = (t_map *)ft_memalloc(sizeof(t_map))) && combien++)
 		return (NULL);
-	if (!(map->set = (char **)malloc(sizeof(char *) * size + 1)))
+	if (!(map->set = (char **)ft_memalloc(sizeof(char *) * size + 1)) && combien++)
 		return (NULL);
 	while (row < size)
 	{
-		if (!(map->set[row] = ft_strnew(sizeof(char) * size + 1)))
+		if (!(map->set[row] = ft_strnew(sizeof(char) * size)) && combien++)
 			return (NULL);
 		map->set[row] = (char *)ft_memset((void *)map->set[row], '.', size);
 		row++;
@@ -37,11 +37,10 @@ t_map		*create_map_elem(int size)
 void		print_map(t_map *map, t_tetris **pieces)
 {
 	int		i;
-	t_map	*save;
 
 	i = 0;
-	save = map;
 	while (i < map->size)
 		ft_putendl(map->set[i++]);
-	ft_free(pieces, &save, 0);
+//	(void)pieces;
+	ft_free(pieces, &map, 0);
 }
