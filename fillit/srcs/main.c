@@ -6,12 +6,18 @@
 /*   By: bihattay <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/24 19:30:07 by bihattay          #+#    #+#             */
-/*   Updated: 2019/01/03 20:12:07 by bihattay         ###   ########.fr       */
+/*   Updated: 2019/01/04 23:07:34 by bihattay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
+void	twenty_five_line(t_map **map, int *size)
+{
+	if (*map)
+		free_map(map);
+	*map = create_map_elem(*size++);
+}
 
 int		main(int argc, char **argv)
 {
@@ -36,11 +42,7 @@ int		main(int argc, char **argv)
 	size = ft_sqrt((count_tetris(pieces->next)) * 4);
 	map = create_map_elem(size++);
 	while (!solve(pieces->next, map))
-	{
-		if (map)
-			free_map(&map);
-		map = create_map_elem(size++);
-	}
+		twenty_five_line(&map, &size);
 	print_map(map, &pieces);
 	return (1);
 }
