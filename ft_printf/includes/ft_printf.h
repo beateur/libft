@@ -6,7 +6,7 @@
 /*   By: bihattay <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 02:06:47 by bihattay          #+#    #+#             */
-/*   Updated: 2019/01/16 03:12:52 by bihattay         ###   ########.fr       */
+/*   Updated: 2019/01/16 05:23:38 by bihattay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,11 @@ typedef struct	s_struct
 {
 	int						index;
 	int						padding;
-	int			len_data;
-	int			ret;
+	int						len_data;
+	int						ret;
+	int						shift;
+	char					opt;
+	s_struct				*next;
 }				t_struct;
 
 #endif
