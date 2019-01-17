@@ -6,7 +6,7 @@
 /*   By: fberger <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/15 02:59:11 by fberger           #+#    #+#             */
-/*   Updated: 2019/01/16 05:24:01 by bihattay         ###   ########.fr       */
+/*   Updated: 2019/01/17 08:08:08 by bihattay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int   get_identifiers(const char *format_id, t_struct **f_ids, int index)
 
 	if (!(new = create_struct(index)))
 		return (0);
-	lst_push(f_ids, new);
+	list_push(f_ids, new);
 	if (!(shift = find_flag(new, format_id)))
 		return (0);
 	new->opt = *shift;
